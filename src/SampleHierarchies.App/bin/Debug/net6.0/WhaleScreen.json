@@ -1,0 +1,39 @@
+{
+  "LineEntries": [
+    {
+      "Text": "Welcome to the Whale Screen!",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Red"
+    },
+    {
+      "Text": "Whale Options:",
+      "BackgroundColor": "Green",
+      "ForegroundColor": "White"
+    },
+    {
+      "Text": "1. List Whales",
+      "BackgroundColor": "Yellow",
+      "ForegroundColor": "Magenta"
+    },
+    {
+      "Text": "2. Add Whale",
+      "BackgroundColor": "Black",
+      "ForegroundColor": "White"
+    },
+    {
+      "Text": "3. Delete Whale",
+      "BackgroundColor": "Black",
+      "ForegroundColor": "Blue"
+    },
+    {
+      "Text": "4. Modify Whale",
+      "BackgroundColor": "White",
+      "ForegroundColor": "Black"
+    },
+    {
+      "Text": "0. Exit",
+      "BackgroundColor": "Black",
+      "ForegroundColor": "White"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+	"Mammals":	{
+		"Dogs":	[
+			{
+				"Breed":	"Bobik",
+				"Species":	1,
+				"Name":	"Artem",
+				"Age":	69
+			}
+		],
+		"Orangutans":	[
+			
+		],
+		"Chimpanzees":	[
+			
+		]
+	}
+}

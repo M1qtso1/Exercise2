@@ -1,0 +1,21 @@
+{
+	"Mammals":	{
+		"Dogs":	[
+			{
+				"Breed":	"qwe",
+				"Species":	1,
+				"Name":	"asd",
+				"Age":	12
+			}
+		],
+		"Orangutans":	[
+			
+		],
+		"Chimpanzees":	[
+			
+		],
+		"Whales":	[
+			
+		]
+	}
+}

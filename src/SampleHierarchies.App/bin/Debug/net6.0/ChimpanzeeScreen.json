@@ -1,0 +1,39 @@
+{
+  "LineEntries": [
+    {
+      "Text": "Welcome to the Chimpanzee Screen!",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Red"
+    },
+    {
+      "Text": "Chimpanzee Options:",
+      "BackgroundColor": "Green",
+      "ForegroundColor": "White"
+    },
+    {
+      "Text": "1. List Chimpanzees",
+      "BackgroundColor": "Yellow",
+      "ForegroundColor": "Magenta"
+    },
+    {
+      "Text": "2. Add Chimpanzee",
+      "BackgroundColor": "Black",
+      "ForegroundColor": "White"
+    },
+    {
+      "Text": "3. Delete Chimpanzee",
+      "BackgroundColor": "Black",
+      "ForegroundColor": "Blue"
+    },
+    {
+      "Text": "4. Modify Chimpanzee",
+      "BackgroundColor": "White",
+      "ForegroundColor": "Black"
+    },
+    {
+      "Text": "0. Exit",
+      "BackgroundColor": "Black",
+      "ForegroundColor": "White"
+    }
+  ]
+}

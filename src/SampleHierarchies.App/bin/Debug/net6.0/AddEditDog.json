@@ -1,0 +1,28 @@
+{
+  "AddEditDog": [
+    {
+      "ActionType": "Prompt",
+      "Message": "Enter dog name:"
+    },
+    {
+      "ActionType": "ReadInput",
+      "VariableName": "dogName"
+    },
+    {
+      "ActionType": "Prompt",
+      "Message": "Enter dog age:"
+    },
+    {
+      "ActionType": "ReadInput",
+      "VariableName": "dogAge"
+    },
+    {
+      "ActionType": "Prompt",
+      "Message": "Enter dog breed:"
+    },
+    {
+      "ActionType": "ReadInput",
+      "VariableName": "dogBreed"
+    }
+  ]
+}

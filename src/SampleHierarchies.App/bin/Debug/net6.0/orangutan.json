@@ -1,0 +1,25 @@
+{
+	"Mammals":	{
+		"Dogs":	[
+			
+		],
+		"Orangutans":	[
+			{
+				"Lifestyle":	true,
+				"Thumbs":	false,
+				"Intelligence":	123,
+				"Behavior":	true,
+				"ReproductiveRate":	false,
+				"Species":	2,
+				"Name":	"Baboo",
+				"Age":	12
+			}
+		],
+		"Chimpanzees":	[
+			
+		],
+		"Whales":	[
+			
+		]
+	}
+}

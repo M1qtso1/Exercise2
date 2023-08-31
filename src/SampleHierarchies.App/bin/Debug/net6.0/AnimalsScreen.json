@@ -1,0 +1,34 @@
+{
+  "LineEntries": [
+    {
+      "BackgroundColor": "Red",
+      "ForegroundColor": "White",
+      "Text": "Animal Screen"
+    },
+    {
+      "BackgroundColor": "Yellow",
+      "ForegroundColor": "Black",
+      "Text": "1. View Mammals"
+    },
+    {
+      "BackgroundColor": "Yellow",
+      "ForegroundColor": "Black",
+      "Text": "2. Save Data to File"
+    },
+    {
+      "BackgroundColor": "Yellow",
+      "ForegroundColor": "Black",
+      "Text": "3. Read Data from File"
+    },
+    {
+      "BackgroundColor": "Yellow",
+      "ForegroundColor": "Black",
+      "Text": "4. Back to Main Menu"
+    },
+    {
+      "BackgroundColor": "Magenta",
+      "ForegroundColor": "White",
+      "Text": "Please enter your choice:"
+    }
+  ]
+}

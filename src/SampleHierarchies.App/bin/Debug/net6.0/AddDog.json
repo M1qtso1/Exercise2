@@ -1,0 +1,16 @@
+{
+  "Fields": [
+    {
+      "Name": "Name",
+      "Prompt": "Enter the dog's name:"
+    },
+    {
+      "Name": "Age",
+      "Prompt": "Enter the dog's age:"
+    },
+    {
+      "Name": "Breed",
+      "Prompt": "Enter the dog's breed:"
+    }
+  ]
+}

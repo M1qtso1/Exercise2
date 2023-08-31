@@ -1,0 +1,39 @@
+{
+  "LineEntries": [
+    {
+      "BackgroundColor": "DarkBlue",
+      "ForegroundColor": "White",
+      "Text": "Mammals Screen"
+    },
+    {
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow",
+      "Text": "1. View Dogs"
+    },
+    {
+      "BackgroundColor": "White",
+      "ForegroundColor": "Red",
+      "Text": "2. View Orangutans"
+    },
+    {
+      "BackgroundColor": "Yellow",
+      "ForegroundColor": "Black",
+      "Text": "3. View Chimpanzees"
+    },
+    {
+      "BackgroundColor": "Yellow",
+      "ForegroundColor": "Black",
+      "Text": "4. View Whales"
+    },
+    {
+      "BackgroundColor": "Yellow",
+      "ForegroundColor": "Black",
+      "Text": "0. Back to Main Menu"
+    },
+    {
+      "BackgroundColor": "Magenta",
+      "ForegroundColor": "White",
+      "Text": "Please enter your choice:"
+    }
+  ]
+}

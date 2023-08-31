@@ -1,0 +1,18 @@
+{
+  "title": "Main Screen",
+  "description": "This is the main screen of the application.",
+  "options": [
+    {
+      "text": "View Animals",
+      "action": "Animals"
+    },
+    {
+      "text": "View Settings",
+      "action": "Settings"
+    },
+    {
+      "text": "Exit",
+      "action": "Exit"
+    }
+  ]
+}

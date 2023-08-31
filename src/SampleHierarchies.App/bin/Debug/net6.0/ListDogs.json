@@ -1,0 +1,5 @@
+{
+  "ListDogsPrompt": "Here's a list of dogs:",
+  "EmptyListMessage": "The list of dogs is empty.",
+  "DogInfo": "Dog number"
+}

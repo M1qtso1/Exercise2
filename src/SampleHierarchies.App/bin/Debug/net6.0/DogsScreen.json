@@ -1,0 +1,34 @@
+{
+  "LineEntries": [
+    {
+      "Text": "Welcome to the Dogs Screen!",
+      "BackgroundColor": "Black",
+      "ForegroundColor": "White"
+    },
+    {
+      "Text": "1. List Dogs",
+      "BackgroundColor": "Black",
+      "ForegroundColor": "White"
+    },
+    {
+      "Text": "2. Create Dog",
+      "BackgroundColor": "Black",
+      "ForegroundColor": "White"
+    },
+    {
+      "Text": "3. Delete Dog",
+      "BackgroundColor": "Black",
+      "ForegroundColor": "White"
+    },
+    {
+      "Text": "4. Modify Dog",
+      "BackgroundColor": "Black",
+      "ForegroundColor": "White"
+    },
+    {
+      "Text": "0. Exit",
+      "BackgroundColor": "Black",
+      "ForegroundColor": "White"
+    }
+  ]
+}

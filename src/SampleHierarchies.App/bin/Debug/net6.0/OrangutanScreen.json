@@ -1,0 +1,39 @@
+{
+  "LineEntries": [
+    {
+      "Text": "Welcome to the Orangutan Screen!",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Red"
+    },
+    {
+      "Text": "Orangutan Options:",
+      "BackgroundColor": "Green",
+      "ForegroundColor": "White"
+    },
+    {
+      "Text": "1. List Orangutans",
+      "BackgroundColor": "Yellow",
+      "ForegroundColor": "Magenta"
+    },
+    {
+      "Text": "2. Add Orangutan",
+      "BackgroundColor": "Black",
+      "ForegroundColor": "White"
+    },
+    {
+      "Text": "3. Delete Orangutan",
+      "BackgroundColor": "Black",
+      "ForegroundColor": "Blue"
+    },
+    {
+      "Text": "4. Modify Orangutan",
+      "BackgroundColor": "White",
+      "ForegroundColor": "Black"
+    },
+    {
+      "Text": "0. Exit",
+      "BackgroundColor": "Black",
+      "ForegroundColor": "White"
+    }
+  ]
+}
