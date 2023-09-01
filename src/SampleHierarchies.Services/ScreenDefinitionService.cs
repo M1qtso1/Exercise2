@@ -1,60 +1,79 @@
-﻿using System;
-using System.IO;
-using Newtonsoft.Json;
-using SampleHierarchies.Data;
-using SampleHierarchies.Interfaces.Services;
+﻿    using System;
+    using System.IO;
+    using System.Reflection.Metadata.Ecma335;
+    using Newtonsoft.Json;
+    using SampleHierarchies.Data;
+    using SampleHierarchies.Interfaces.Services;
 
-namespace SampleHierarchies.Services
-{
-    public class ScreenDefinitionService : IScreenDefinitionService
+    namespace SampleHierarchies.Services
     {
-        public ScreenDefinition Load(string jsonFileName)
+        public class ScreenDefinitionService : IScreenDefinitionService
+        {
+            public ScreenDefinition Load(string jsonFileName)
         {
             if (!File.Exists(jsonFileName))
             {
-                return new ScreenDefinition();
+                return null; // Return null when the file is not found
             }
 
-            string json = File.ReadAllText(jsonFileName);
-            return JsonConvert.DeserializeObject<ScreenDefinition>(json);
-        }
+        string json = File.ReadAllText(jsonFileName);
+        return JsonConvert.DeserializeObject<ScreenDefinition>(json);
+    }
 
-        public bool Save(ScreenDefinition screenDefinition, string jsonFileName)
+            public bool Save(ScreenDefinition screenDefinition, string jsonFileName)
+            {
+                try
+                {
+                    string json = JsonConvert.SerializeObject(screenDefinition, Formatting.Indented);
+                    File.WriteAllText(jsonFileName, json);
+                    return true;
+                    //-Pawlaczyk: What is LocalVariablesEncoder 
+                    //-Sanya: Baby dont hurt me,
+                    //        Don't hurt me,
+                    //        Nomore.
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error saving screen definition: {ex.Message}");
+                    return false;
+                }
+            }
+            public Dictionary<string, string> LoadScreenDefinitions(string jsonFilePath)
+            {
+                // Check if the JSON file exists
+                if (!File.Exists(jsonFilePath))
+                {
+                    Console.WriteLine("Screen definition JSON file does not exist.");
+                    return new Dictionary<string, string>();
+                }
+
+                try
+                {
+                    // Read the JSON content from the file
+                    string jsonContent = File.ReadAllText(jsonFilePath);
+
+                    // Deserialize the JSON content into a Dictionary
+                    return JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonContent);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error loading screen definitions: {ex.Message}");
+                    return new Dictionary<string, string>();
+                }
+            }
+        public string FindLineByText(string jsonFileName, string searchText)
         {
-            try
-            {
-                string json = JsonConvert.SerializeObject(screenDefinition, Formatting.Indented);
-                File.WriteAllText(jsonFileName, json);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error saving screen definition: {ex.Message}");
-                return false;
-            }
-        }
-        public Dictionary<string, string> LoadScreenDefinitions(string jsonFilePath)
-        {
-            // Check if the JSON file exists
-            if (!File.Exists(jsonFilePath))
-            {
-                Console.WriteLine("Screen definition JSON file does not exist.");
-                return new Dictionary<string, string>();
-            }
+            var screenDefinition = Load(jsonFileName);
+            var matchingLine = screenDefinition.LineEntries.FirstOrDefault(lineEntry => lineEntry.Text.Contains(searchText));
 
-            try
+            if (matchingLine != null)
             {
-                // Read the JSON content from the file
-                string jsonContent = File.ReadAllText(jsonFilePath);
-
-                // Deserialize the JSON content into a Dictionary
-                return JsonConvert.DeserializeObject<Dictionary<string, string>>(jsonContent);
+                return matchingLine.Text;
             }
-            catch (Exception ex)
+            else
             {
-                Console.WriteLine($"Error loading screen definitions: {ex.Message}");
-                return new Dictionary<string, string>();
+                throw new InvalidOperationException($"No matching line found for '{searchText}' in the JSON file.");
             }
         }
     }
-}
+    }

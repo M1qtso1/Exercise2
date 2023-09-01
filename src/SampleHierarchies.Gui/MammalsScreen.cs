@@ -63,11 +63,18 @@ public sealed class MammalsScreen : Screen
             var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
 
             // Loop through the line entries and display them
-            foreach (var lineEntry in screenDefinition.LineEntries)
+            int startIndex = 0;
+            int endIndex = 6;
+
+            if (startIndex >= 0 && endIndex >= startIndex && endIndex < screenDefinition.LineEntries.Count)
             {
-                Console.BackgroundColor = lineEntry.BackgroundColor;
-                Console.ForegroundColor = lineEntry.ForegroundColor;
-                Console.WriteLine(lineEntry.Text);
+                for (int i = startIndex; i <= endIndex; i++)
+                {
+                    var lineEntry = screenDefinition.LineEntries[i];
+                    Console.BackgroundColor = lineEntry.BackgroundColor;
+                    Console.ForegroundColor = lineEntry.ForegroundColor;
+                    Console.WriteLine(lineEntry.Text);
+                }
             }
 
             // Restore default colors
@@ -102,14 +109,21 @@ public sealed class MammalsScreen : Screen
                         break;
 
                     case MammalsScreenChoices.Exit:
-                        Console.WriteLine("Going back to parent menu.");
+                        var exitMammals = screenDefinition.LineEntries[7];// Going back to parent menu.
+                        Console.BackgroundColor = exitMammals.BackgroundColor;
+                        Console.ForegroundColor = exitMammals.ForegroundColor;
+                        Console.WriteLine(exitMammals.Text);
                         Console.Clear();
+                        Console.ResetColor();
                         return;
                 }
             }
             catch
             {
-                Console.WriteLine("Invalid choice. Try again.");
+                var errorMammals = screenDefinition.LineEntries[8];//Invalid choice. Try again.
+                Console.BackgroundColor = errorMammals.BackgroundColor;
+                Console.ForegroundColor = errorMammals.ForegroundColor;
+                Console.WriteLine(errorMammals.Text);
             }
 
         }

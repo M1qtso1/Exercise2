@@ -6,11 +6,6 @@
       "ForegroundColor": "Red"
     },
     {
-      "Text": "Whale Options:",
-      "BackgroundColor": "Green",
-      "ForegroundColor": "White"
-    },
-    {
       "Text": "1. List Whales",
       "BackgroundColor": "Yellow",
       "ForegroundColor": "Magenta"
@@ -34,6 +29,96 @@
       "Text": "0. Exit",
       "BackgroundColor": "Black",
       "ForegroundColor": "White"
+    },
+    {
+      "Text": "Here's the list of whales:",
+      "BackgroundColor": "Magenta",
+      "ForegroundColor": "White"
+    },
+    {
+      "Text": "Whale",
+      "BackgroundColor": "Magenta",
+      "ForegroundColor": "Blue"
+    },
+    {
+      "Text": "The list of whales is empty.",
+      "BackgroundColor": "Magenta",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Whale has been added to a list of whales",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Going back to parent menu.",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Invalid input. Try again.",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "What is the name of the whale you want to delete?",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Whale has been deleted from a list of whales",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Whale not found.",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "What is the name of the whale you want to edit?",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Whale after edit:",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "What name of the whale? ",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "What is the whale's age?",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "This whale has echolocation? (true/false)?",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "This whale is toothed? (true/false)",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "How long is its lifespan? (Enter a number)",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "This whale has sociable behavior? (true/false)",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Feeds on squid?",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
     }
   ]
 }

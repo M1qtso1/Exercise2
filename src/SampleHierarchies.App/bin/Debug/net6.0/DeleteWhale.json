@@ -1,0 +1,19 @@
+{
+  "LineEntries": [
+    {
+      "Text": "Whale with name: {0} has been deleted from a list of whales",
+      "BackgroundColor": "Magenta",
+      "ForegroundColor": "Cyan"
+    },
+    {
+      "Text": "Whale,",
+      "BackgroundColor": "Magenta",
+      "ForegroundColor": "Cyan"
+    },
+    {
+      "Text": "The list of whales is empty.",
+      "BackgroundColor": "Magenta",
+      "ForegroundColor": "Cyan"
+    }
+  ]
+}

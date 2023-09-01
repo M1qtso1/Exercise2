@@ -2,6 +2,7 @@
 using SampleHierarchies.Data.Mammals;
 using SampleHierarchies.Enums;
 using SampleHierarchies.Interfaces.Data;
+using SampleHierarchies.Interfaces.Data.Mammals;
 using SampleHierarchies.Interfaces.Services;
 using SampleHierarchies.Services;
 using System.Drawing;
@@ -44,9 +45,9 @@ public sealed class DogsScreen : Screen
 
     #endregion Properties And Ctor
 
-        #region Public Methods
+    #region Public Methods
 
-        /// <inheritdoc/>
+    /// <inheritdoc/>
     public override void Show()
     {
         Console.Clear();
@@ -55,16 +56,23 @@ public sealed class DogsScreen : Screen
             var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
 
             // Loop through the line entries and display them
-            foreach (var lineEntry in screenDefinition.LineEntries)
+            int startIndex = 0;
+            int endIndex = 5;
+
+            if (startIndex >= 0 && endIndex >= startIndex && endIndex < screenDefinition.LineEntries.Count)
             {
-                Console.BackgroundColor = lineEntry.BackgroundColor;
-                Console.ForegroundColor = lineEntry.ForegroundColor;
-                Console.WriteLine(lineEntry.Text);
+                for (int i = startIndex; i <= endIndex; i++)
+                {
+                    var lineEntry = screenDefinition.LineEntries[i];
+                    Console.BackgroundColor = lineEntry.BackgroundColor;
+                    Console.ForegroundColor = lineEntry.ForegroundColor;
+                    Console.WriteLine(lineEntry.Text);
+                }
             }
             // Restore default colors
             Console.ResetColor();
             string? choiceAsString = Console.ReadLine();
-
+            Console.Clear();
             // Validate choice
             try
             {
@@ -92,18 +100,24 @@ public sealed class DogsScreen : Screen
                         break;
 
                     case DogsScreenChoices.Exit:
-                        Console.WriteLine("Going back to parent menu.");
+                        var exitDogs = screenDefinition.LineEntries[10];//Going back to parent menu.
+                        Console.BackgroundColor = exitDogs.BackgroundColor;
+                        Console.ForegroundColor = exitDogs.ForegroundColor;
+                        Console.WriteLine(exitDogs.Text);
                         Console.Clear();
+                        Console.ResetColor();
                         return;
                 }
             }
             catch
             {
-                Console.WriteLine("Invalid choice. Try again.");
+                var errorDogs = screenDefinition.LineEntries[11];//Invalid input. Try again.
+                Console.BackgroundColor = errorDogs.BackgroundColor;
+                Console.ForegroundColor = errorDogs.ForegroundColor;
+                Console.WriteLine(errorDogs.Text);
             }
         }
     }
-
     #endregion // Public Methods
 
     #region Private Methods
@@ -113,22 +127,33 @@ public sealed class DogsScreen : Screen
     /// </summary>
     private void ListDogs()
     {
+        var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
         Console.WriteLine();
         if (_dataService?.Animals?.Mammals?.Dogs is not null &&
             _dataService.Animals.Mammals.Dogs.Count > 0)
         {
-            Console.WriteLine("Here's a list of dogs:");
+            var listDogs = screenDefinition.LineEntries[6];//Here's the list of dogs:
+            Console.BackgroundColor = listDogs.BackgroundColor;
+            Console.ForegroundColor = listDogs.ForegroundColor;
+            Console.WriteLine(listDogs.Text);
             int i = 1;
+
             foreach (Dog dog in _dataService.Animals.Mammals.Dogs)
             {
-                Console.Write($"Dog number {i}, ");
+                var listDog = screenDefinition.LineEntries[7];//Dog
+                Console.BackgroundColor = listDog.BackgroundColor;
+                Console.ForegroundColor = listDog.ForegroundColor;
+                Console.WriteLine(listDog.Text);
                 dog.Display();
                 i++;
             }
         }
         else
-        {
-            Console.WriteLine("The list of dogs is empty.");
+        {  
+            var listDogs = screenDefinition.LineEntries[8];//The list of dogs is empty.
+            Console.BackgroundColor = listDogs.BackgroundColor;
+            Console.ForegroundColor = listDogs.ForegroundColor;
+            Console.WriteLine(listDogs.Text);
         }
     }
 
@@ -137,15 +162,22 @@ public sealed class DogsScreen : Screen
     /// </summary>
     private void AddDog()
     {
+        var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
         try
         {
             Dog dog = AddEditDog();
             _dataService?.Animals?.Mammals?.Dogs?.Add(dog);
-            Console.WriteLine("Dog with name: {0} has been added to a list of dogs", dog.Name);
+            var addDogs = screenDefinition.LineEntries[9];//Dog has been added to a list of dogs
+            Console.BackgroundColor = addDogs.BackgroundColor;
+            Console.ForegroundColor = addDogs.ForegroundColor;
+            Console.WriteLine(addDogs.Text, dog.Name);
         }
         catch
         {
-            Console.WriteLine("Invalid input.");
+            var addDogs = screenDefinition.LineEntries[11];//Invalid input.
+            Console.BackgroundColor = addDogs.BackgroundColor;
+            Console.ForegroundColor = addDogs.ForegroundColor;
+            Console.WriteLine(addDogs.Text);
         }
     }
 
@@ -154,9 +186,13 @@ public sealed class DogsScreen : Screen
     /// </summary>
     private void DeleteDog()
     {
+        var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
         try
         {
-            Console.Write("What is the name of the dog you want to delete? ");
+            var deleteDogs = screenDefinition.LineEntries[12];//What is the name of the dog you want to delete?
+            Console.BackgroundColor = deleteDogs.BackgroundColor;
+            Console.ForegroundColor = deleteDogs.ForegroundColor;
+            Console.WriteLine(deleteDogs.Text);
             string? name = Console.ReadLine();
             if (name is null)
             {
@@ -167,16 +203,25 @@ public sealed class DogsScreen : Screen
             if (dog is not null)
             {
                 _dataService?.Animals?.Mammals?.Dogs?.Remove(dog);
-                Console.WriteLine("Dog with name: {0} has been deleted from a list of dogs", dog.Name);
+                var deleteDog = screenDefinition.LineEntries[13];//Dog has been deleted from a list of dogs
+                Console.BackgroundColor = deleteDog.BackgroundColor;
+                Console.ForegroundColor = deleteDog.ForegroundColor;
+                Console.WriteLine(deleteDog.Text, dog.Name);
             }
             else
             {
-                Console.WriteLine("Dog not found.");
+                var deleteDog = screenDefinition.LineEntries[14];//Dog not found.
+                Console.BackgroundColor = deleteDog.BackgroundColor;
+                Console.ForegroundColor = deleteDog.ForegroundColor;
+                Console.WriteLine(deleteDog.Text);
             }
         }
         catch
         {
-            Console.WriteLine("Invalid input.");
+            var deleteDogs = screenDefinition.LineEntries[11];//Invalid input. Try again.
+            Console.BackgroundColor = deleteDogs.BackgroundColor;
+            Console.ForegroundColor = deleteDogs.ForegroundColor;
+            Console.WriteLine(deleteDogs.Text);
         }
     }
 
@@ -185,9 +230,13 @@ public sealed class DogsScreen : Screen
     /// </summary>
     private void EditDogMain()
     {
+        var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
         try
         {
-            Console.Write("What is the name of the dog you want to edit? ");
+            var editDogs = screenDefinition.LineEntries[15];//What is the name of the dog you want to edit?
+            Console.BackgroundColor = editDogs.BackgroundColor;
+            Console.ForegroundColor = editDogs.ForegroundColor;
+            Console.WriteLine(editDogs.Text);
             string? name = Console.ReadLine();
             if (name is null)
             {
@@ -199,17 +248,26 @@ public sealed class DogsScreen : Screen
             {
                 Dog dogEdited = AddEditDog();
                 dog.Copy(dogEdited);
-                Console.Write("Dog after edit:");
+                var editDog = screenDefinition.LineEntries[16]; //Dog after edit:
+                Console.BackgroundColor = editDog.BackgroundColor;
+                Console.ForegroundColor = editDog.ForegroundColor;
+                Console.WriteLine(editDog.Text);
                 dog.Display();
             }
             else
             {
-                Console.WriteLine("Dog not found.");
+                var editDog = screenDefinition.LineEntries[14];//Dog not found.
+                Console.BackgroundColor = editDog.BackgroundColor;
+                Console.ForegroundColor = editDog.ForegroundColor;
+                Console.WriteLine(editDog.Text);
             }
         }
         catch
         {
-            Console.WriteLine("Invalid input. Try again.");
+            var editDogs = screenDefinition.LineEntries[11];//Invalid input. Try again.
+            Console.BackgroundColor = editDogs.BackgroundColor;
+            Console.ForegroundColor = editDogs.ForegroundColor;
+            Console.WriteLine(editDogs.Text);
         }
     }
 
@@ -219,11 +277,21 @@ public sealed class DogsScreen : Screen
     /// <exception cref="ArgumentNullException"></exception>
     private Dog AddEditDog()
     {
-        Console.Write("What name of the dog? ");
+        var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
+        var addEditDogs = screenDefinition.LineEntries[17];//What name of the dog?
+        Console.BackgroundColor = addEditDogs.BackgroundColor;
+        Console.ForegroundColor = addEditDogs.ForegroundColor;
+        Console.WriteLine(addEditDogs.Text);
         string? name = Console.ReadLine();
-        Console.Write("What is the dog's age? ");
+        var addEditDog = screenDefinition.LineEntries[18];//What is the dog's age?
+        Console.BackgroundColor = addEditDog.BackgroundColor;
+        Console.ForegroundColor = addEditDog.ForegroundColor;
+        Console.WriteLine(addEditDog.Text);
         string? ageAsString = Console.ReadLine();
-        Console.Write("What is the dog's breed? ");
+        var addEditDogsBreed = screenDefinition.LineEntries[19];//What is the dog's breed?
+        Console.BackgroundColor = addEditDogsBreed.BackgroundColor;
+        Console.ForegroundColor = addEditDogsBreed.ForegroundColor;
+        Console.WriteLine(addEditDogsBreed.Text);
         string? breed = Console.ReadLine();
 
         if (name is null)
@@ -240,9 +308,7 @@ public sealed class DogsScreen : Screen
         }
         int age = Int32.Parse(ageAsString);
         Dog dog = new Dog(name, age, breed);
-
         return dog;
     }
-
     #endregion // Private Methods
 }

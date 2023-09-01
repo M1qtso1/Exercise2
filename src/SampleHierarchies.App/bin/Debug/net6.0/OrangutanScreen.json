@@ -6,11 +6,6 @@
       "ForegroundColor": "Red"
     },
     {
-      "Text": "Orangutan Options:",
-      "BackgroundColor": "Green",
-      "ForegroundColor": "White"
-    },
-    {
       "Text": "1. List Orangutans",
       "BackgroundColor": "Yellow",
       "ForegroundColor": "Magenta"
@@ -34,6 +29,96 @@
       "Text": "0. Exit",
       "BackgroundColor": "Black",
       "ForegroundColor": "White"
+    },
+    {
+      "Text": "Here's the list of orangutans:",
+      "BackgroundColor": "Magenta",
+      "ForegroundColor": "White"
+    },
+    {
+      "Text": "Orangutan",
+      "BackgroundColor": "Magenta",
+      "ForegroundColor": "Blue"
+    },
+    {
+      "Text": "The list of orangutans is empty.",
+      "BackgroundColor": "Magenta",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Orangutan has been added to a list of orangutans",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Going back to parent menu.",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Invalid input. Try again.",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "What is the name of the orangutan you want to delete?",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Orangutan has been deleted from a list of orangutans",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Orangutan not found.",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "What is the name of the orangutan you want to edit?",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Orangutan after edit:",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "What name of the orangutan? ",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "What is the orangutan's age?",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "This orangutan has opposable thumbs? (true/false)",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "This orangutan has solitary behavior? (true/false)",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "This orangutan has arboreal lifestyle? (true/false)",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "What is the orangutan's level of intelligence? (Enter a number)",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "This orangutan has slow reproductive rate? (true/false)",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
     }
   ]
 }

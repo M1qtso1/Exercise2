@@ -34,6 +34,16 @@
       "BackgroundColor": "Magenta",
       "ForegroundColor": "White",
       "Text": "Please enter your choice:"
+    },
+    {
+      "Text": "Going back to parent menu.",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Invalid choice. Try again.",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
     }
   ]
 }

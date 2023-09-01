@@ -62,13 +62,20 @@ public sealed class AnimalsScreen : Screen
             var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
 
             // Loop through the line entries and display them
-            foreach (var lineEntry in screenDefinition.LineEntries)
-            {
-                Console.BackgroundColor = lineEntry.BackgroundColor;
-                Console.ForegroundColor = lineEntry.ForegroundColor;
-                Console.WriteLine(lineEntry.Text);
-            }
+            int startIndex = 0;
+            int endIndex = 5;
 
+            if (startIndex >= 0 && endIndex >= startIndex && endIndex < screenDefinition.LineEntries.Count)
+            {
+                for (int i = startIndex; i <= endIndex; i++)
+                {
+                    var lineEntry = screenDefinition.LineEntries[i];
+                    Console.BackgroundColor = lineEntry.BackgroundColor;
+                    Console.ForegroundColor = lineEntry.ForegroundColor;
+                    Console.WriteLine(lineEntry.Text);
+                }
+            }
+            
             // Restore default colors
             Console.ResetColor();
             string? choiceAsString = Console.ReadLine();
@@ -97,7 +104,11 @@ public sealed class AnimalsScreen : Screen
                         break;
 
                     case AnimalsScreenChoices.Exit:
-                        Console.WriteLine("Going back to parent menu.");
+                        var exitDogs = screenDefinition.LineEntries[6];//Going back to parent menu.
+                        Console.BackgroundColor = exitDogs.BackgroundColor;
+                        Console.ForegroundColor = exitDogs.ForegroundColor;
+                        Console.WriteLine(exitDogs.Text);
+                        Console.ResetColor();
                         Console.Clear();
                         return;
                 }
@@ -119,20 +130,30 @@ public sealed class AnimalsScreen : Screen
 /// </summary>
 private void SaveToFile()
     {
+        var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
         try
         {
-            Console.Write("Save data to file: ");
+            var saveAnimals = screenDefinition.LineEntries[7];// Save data to file:
+            Console.BackgroundColor = saveAnimals.BackgroundColor;
+            Console.ForegroundColor = saveAnimals.ForegroundColor;
+            Console.WriteLine(saveAnimals.Text);
             var fileName = Console.ReadLine();
             if (fileName is null)
             {
                 throw new ArgumentNullException(nameof(fileName));
             }
             _dataService.Write(fileName);
-            Console.WriteLine("Data saving to: '{0}' was successful.", fileName);
+            var saveAnimal = screenDefinition.LineEntries[8];// Data saving was successful.
+            Console.BackgroundColor = saveAnimal.BackgroundColor;
+            Console.ForegroundColor = saveAnimal.ForegroundColor;
+            Console.WriteLine(saveAnimal.Text, fileName);
         }
         catch
         {
-            Console.WriteLine("Data saving was not successful.");
+            var saveAnimals = screenDefinition.LineEntries[9];// Data saving was not successful.
+            Console.BackgroundColor = saveAnimals.BackgroundColor;
+            Console.ForegroundColor = saveAnimals.ForegroundColor;
+            Console.WriteLine(saveAnimals.Text);
         }
     }
 
@@ -141,20 +162,30 @@ private void SaveToFile()
     /// </summary>
     private void ReadFromFile()
     {
+        var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
         try
         {
-            Console.Write("Read data from file: ");
+            var readAnimals = screenDefinition.LineEntries[10];// Read data from file: 
+            Console.BackgroundColor = readAnimals.BackgroundColor;
+            Console.ForegroundColor = readAnimals.ForegroundColor;
+            Console.WriteLine(readAnimals.Text);
             var fileName = Console.ReadLine();
             if (fileName is null)
             {
                 throw new ArgumentNullException(nameof(fileName));
             }
             _dataService.Write(fileName);
-            Console.WriteLine("Data reading from: '{0}' was successful.", fileName);
+            var readAnimal = screenDefinition.LineEntries[11];// Data reading was successful.
+            Console.BackgroundColor = readAnimal.BackgroundColor;
+            Console.ForegroundColor = readAnimal.ForegroundColor;
+            Console.WriteLine(readAnimal.Text, fileName);
         }
         catch
         {
-            Console.WriteLine("Data reading from was not successful.");
+            var readAnimals = screenDefinition.LineEntries[11];// Data reading was not successful.
+            Console.BackgroundColor = readAnimals.BackgroundColor;
+            Console.ForegroundColor = readAnimals.ForegroundColor;
+            Console.WriteLine(readAnimals.Text);
         }
     }
     #endregion // Private Methods

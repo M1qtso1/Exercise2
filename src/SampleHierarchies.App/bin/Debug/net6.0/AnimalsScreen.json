@@ -29,6 +29,41 @@
       "BackgroundColor": "Magenta",
       "ForegroundColor": "White",
       "Text": "Please enter your choice:"
+    },
+    {
+      "Text": "Going back to parent menu.",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Save data to file:",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Data saving was successful.",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Data saving was not successful.",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Read data from file: ",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Data reading was successful.",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Data reading was not successful.",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
     }
   ]
 }

@@ -3,7 +3,7 @@
     {
       "Text": "Welcome to the Dogs Screen!",
       "BackgroundColor": "Black",
-      "ForegroundColor": "White"
+      "ForegroundColor": "Red"
     },
     {
       "Text": "1. List Dogs",
@@ -12,7 +12,7 @@
     },
     {
       "Text": "2. Create Dog",
-      "BackgroundColor": "Black",
+      "BackgroundColor": "Green",
       "ForegroundColor": "White"
     },
     {
@@ -29,6 +29,76 @@
       "Text": "0. Exit",
       "BackgroundColor": "Black",
       "ForegroundColor": "White"
+    },
+    {
+      "Text": "Here's the list of dogs:",
+      "BackgroundColor": "Magenta",
+      "ForegroundColor": "White"
+    },
+    {
+      "Text": "Dog",
+      "BackgroundColor": "Magenta",
+      "ForegroundColor": "Blue"
+    },
+    {
+      "Text": "The list of dogs is empty.",
+      "BackgroundColor": "Magenta",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Dog has been added to a list of dogs",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Going back to parent menu.",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Invalid input. Try again.",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "What is the name of the dog you want to delete?",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Dog has been deleted from a list of dogs",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Dog not found.",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "What is the name of the dog you want to edit?",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "Dog after edit:",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "What name of the dog? ",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "What is the dog's age?",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
+    },
+    {
+      "Text": "What is the dog's breed?",
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "Yellow"
     }
   ]
 }

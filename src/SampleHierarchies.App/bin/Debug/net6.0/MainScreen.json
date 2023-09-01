@@ -1,17 +1,17 @@
 {
   "LineEntries": [
     {
-      "BackgroundColor": "Magenta",
-      "ForegroundColor": "White",
+      "BackgroundColor": "White",
+      "ForegroundColor": "Black",
       "Text": "Your available choices are:"
     },
     {
-      "BackgroundColor": "Magenta",
+      "BackgroundColor": "Black",
       "ForegroundColor": "White",
       "Text": "0. Exit"
     },
     {
-      "BackgroundColor": "Magenta",
+      "BackgroundColor": "Cyan",
       "ForegroundColor": "White",
       "Text": "1. Animals"
     },
@@ -24,6 +24,21 @@
       "BackgroundColor": "Magenta",
       "ForegroundColor": "White",
       "Text": "Please enter your choice:"
+    },
+    {
+      "BackgroundColor": "Blue",
+      "ForegroundColor": "White",
+      "Text": "Setings are not working at this moment."
+    },
+    {
+      "BackgroundColor": "Magenta",
+      "ForegroundColor": "Green",
+      "Text": "Goodbye."
+    },
+    {
+      "BackgroundColor": "Magenta",
+      "ForegroundColor": "Yellow",
+      "Text": "Invalid choice. Try again."
     }
   ]
 }
