@@ -6,27 +6,27 @@
       "ForegroundColor": "Red"
     },
     {
-      "Text": "1. List Chimpanzees",
+      "Text": "List Chimpanzees",
       "BackgroundColor": "Yellow",
       "ForegroundColor": "Magenta"
     },
     {
-      "Text": "2. Add Chimpanzee",
+      "Text": "Add Chimpanzee",
       "BackgroundColor": "Black",
       "ForegroundColor": "White"
     },
     {
-      "Text": "3. Delete Chimpanzee",
+      "Text": "Delete Chimpanzee",
       "BackgroundColor": "Black",
       "ForegroundColor": "Blue"
     },
     {
-      "Text": "4. Modify Chimpanzee",
+      "Text": "Modify Chimpanzee",
       "BackgroundColor": "White",
       "ForegroundColor": "Black"
     },
     {
-      "Text": "0. Exit",
+      "Text": "Exit",
       "BackgroundColor": "Black",
       "ForegroundColor": "White"
     },

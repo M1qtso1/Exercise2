@@ -6,27 +6,27 @@
       "ForegroundColor": "Red"
     },
     {
-      "Text": "1. List Dogs",
+      "Text": "List Dogs",
       "BackgroundColor": "Black",
-      "ForegroundColor": "White"
+      "ForegroundColor": "Yellow"
     },
     {
-      "Text": "2. Create Dog",
+      "Text": "Create Dog",
       "BackgroundColor": "Green",
       "ForegroundColor": "White"
     },
     {
-      "Text": "3. Delete Dog",
+      "Text": "Delete Dog",
       "BackgroundColor": "Black",
       "ForegroundColor": "White"
     },
     {
-      "Text": "4. Modify Dog",
-      "BackgroundColor": "Black",
+      "Text": "Modify Dog",
+      "BackgroundColor": "Green",
       "ForegroundColor": "White"
     },
     {
-      "Text": "0. Exit",
+      "Text": "Exit",
       "BackgroundColor": "Black",
       "ForegroundColor": "White"
     },

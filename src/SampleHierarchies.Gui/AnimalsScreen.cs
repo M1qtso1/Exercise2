@@ -57,67 +57,76 @@ public sealed class AnimalsScreen : Screen
     public override void Show()
     {
         Console.Clear();
+        // Load the screen definition from the JSON file
+        var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
+        int selectedIndex = 1; // Track the currently selected line
+        int totalLines = screenDefinition.LineEntries.Count;
+        int startIndex = 0;
+        int endIndex = 5;
         while (true)
         {
-            var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
-
-            // Loop through the line entries and display them
-            int startIndex = 0;
-            int endIndex = 5;
-
-            if (startIndex >= 0 && endIndex >= startIndex && endIndex < screenDefinition.LineEntries.Count)
+            Console.BackgroundColor = ConsoleColor.Black;
+            // Display the screen lines
+            for (int i = startIndex; i <= endIndex; i++)
             {
-                for (int i = startIndex; i <= endIndex; i++)
-                {
-                    var lineEntry = screenDefinition.LineEntries[i];
-                    Console.BackgroundColor = lineEntry.BackgroundColor;
-                    Console.ForegroundColor = lineEntry.ForegroundColor;
-                    Console.WriteLine(lineEntry.Text);
-                }
-            }
-            
-            // Restore default colors
-            Console.ResetColor();
-            string? choiceAsString = Console.ReadLine();
-
-            // Validate choice
-            try
-            {
-                if (choiceAsString is null)
-                {
-                    throw new ArgumentNullException(nameof(choiceAsString));
-                }
-
-                AnimalsScreenChoices choice = (AnimalsScreenChoices)Int32.Parse(choiceAsString);
-                switch (choice)
-                {
-                    case AnimalsScreenChoices.Mammals:
-                        _mammalsScreen.Show();
-                        break;
-
-                    case AnimalsScreenChoices.Save:
-                        SaveToFile();
-                        break;
-
-                    case AnimalsScreenChoices.Read:
-                        ReadFromFile();
-                        break;
-
-                    case AnimalsScreenChoices.Exit:
-                        var exitDogs = screenDefinition.LineEntries[6];//Going back to parent menu.
-                        Console.BackgroundColor = exitDogs.BackgroundColor;
-                        Console.ForegroundColor = exitDogs.ForegroundColor;
-                        Console.WriteLine(exitDogs.Text);
-                        Console.ResetColor();
-                        Console.Clear();
-                        return;
-                }
-            }
-            catch
-            {
-                Console.WriteLine("Invalid choice. Try again.");
+                var lineEntry = screenDefinition.LineEntries[i];
+                Console.BackgroundColor = lineEntry.BackgroundColor;
+                Console.ForegroundColor = lineEntry.ForegroundColor;
+                if (i == selectedIndex)
+                    Console.Write("-> "); // Indicate the selected line
+                else
+                    Console.Write("   ");
+                Console.WriteLine(lineEntry.Text);
             }
 
+            // Handle user input
+            var key = Console.ReadKey(intercept: true).Key;
+            switch (key)
+            {
+                case ConsoleKey.UpArrow:
+                    selectedIndex = Math.Max(1, selectedIndex - 1);
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.Clear();
+                    break;
+                case ConsoleKey.DownArrow:
+                    selectedIndex = Math.Min(4, selectedIndex + 1);
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.Clear();
+                    break;
+                case ConsoleKey.Enter:
+                    switch (selectedIndex)
+                    {
+                        case 1:
+                            // Action for the first line
+                            Console.BackgroundColor = ConsoleColor.Black;
+                            Console.Clear();
+                            _mammalsScreen.Show();
+                            break;
+                        case 2:
+                            SaveToFile();
+                            break;
+                        case 3:
+                            ReadFromFile();
+                            break;
+                        case 4:
+                            // Action for the fifth line
+                            Console.BackgroundColor = ConsoleColor.Black;
+                            Console.Clear();
+                            var settingsMain = screenDefinition.LineEntries[4];// Going back to the parent menu.
+                            Console.BackgroundColor = settingsMain.BackgroundColor;
+                            Console.ForegroundColor = settingsMain.ForegroundColor;
+                            Console.WriteLine(settingsMain.Text);
+                            Console.BackgroundColor = ConsoleColor.Black;
+                            Console.Clear();
+                            return;
+                        default:
+                            break;
+                    }
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -182,7 +191,7 @@ private void SaveToFile()
         }
         catch
         {
-            var readAnimals = screenDefinition.LineEntries[11];// Data reading was not successful.
+            var readAnimals = screenDefinition.LineEntries[12];// Data reading was not successful.
             Console.BackgroundColor = readAnimals.BackgroundColor;
             Console.ForegroundColor = readAnimals.ForegroundColor;
             Console.WriteLine(readAnimals.Text);

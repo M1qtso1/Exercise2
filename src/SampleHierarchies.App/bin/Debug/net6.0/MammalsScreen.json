@@ -8,27 +8,27 @@
     {
       "BackgroundColor": "Blue",
       "ForegroundColor": "Yellow",
-      "Text": "1. View Dogs"
+      "Text": "View Dogs"
     },
     {
       "BackgroundColor": "White",
       "ForegroundColor": "Red",
-      "Text": "2. View Orangutans"
+      "Text": "View Orangutans"
     },
     {
       "BackgroundColor": "Yellow",
       "ForegroundColor": "Black",
-      "Text": "3. View Chimpanzees"
+      "Text": "View Chimpanzees"
     },
     {
       "BackgroundColor": "Yellow",
       "ForegroundColor": "Black",
-      "Text": "4. View Whales"
+      "Text": "View Whales"
     },
     {
       "BackgroundColor": "Yellow",
       "ForegroundColor": "Black",
-      "Text": "0. Back to Main Menu"
+      "Text": "Back to Main Menu"
     },
     {
       "BackgroundColor": "Magenta",

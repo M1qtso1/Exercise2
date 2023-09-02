@@ -8,17 +8,17 @@
     {
       "BackgroundColor": "Black",
       "ForegroundColor": "White",
-      "Text": "0. Exit"
+      "Text": "Exit"
     },
     {
       "BackgroundColor": "Cyan",
       "ForegroundColor": "White",
-      "Text": "1. Animals"
+      "Text": "Animals"
     },
     {
       "BackgroundColor": "Magenta",
       "ForegroundColor": "White",
-      "Text": "2. Create a new settings"
+      "Text": "Create a new settings"
     },
     {
       "BackgroundColor": "Magenta",

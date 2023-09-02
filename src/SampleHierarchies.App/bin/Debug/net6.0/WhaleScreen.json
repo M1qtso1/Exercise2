@@ -6,27 +6,27 @@
       "ForegroundColor": "Red"
     },
     {
-      "Text": "1. List Whales",
+      "Text": "List Whales",
       "BackgroundColor": "Yellow",
       "ForegroundColor": "Magenta"
     },
     {
-      "Text": "2. Add Whale",
+      "Text": "Add Whale",
       "BackgroundColor": "Black",
       "ForegroundColor": "White"
     },
     {
-      "Text": "3. Delete Whale",
+      "Text": "Delete Whale",
       "BackgroundColor": "Black",
       "ForegroundColor": "Blue"
     },
     {
-      "Text": "4. Modify Whale",
+      "Text": "Modify Whale",
       "BackgroundColor": "White",
       "ForegroundColor": "Black"
     },
     {
-      "Text": "0. Exit",
+      "Text": "Exit",
       "BackgroundColor": "Black",
       "ForegroundColor": "White"
     },

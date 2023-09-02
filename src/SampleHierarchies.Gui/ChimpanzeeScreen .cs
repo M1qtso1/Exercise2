@@ -44,70 +44,78 @@ namespace SampleHierarchies.Gui
         public override void Show()
         {
             Console.Clear();
+            // Load the screen definition from the JSON file
+            var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
+            int selectedIndex = 1; // Track the currently selected line
+            int totalLines = screenDefinition.LineEntries.Count;
+            int startIndex = 0;
+            int endIndex = 5;
+
             while (true)
             {
-                var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
+                Console.BackgroundColor = ConsoleColor.Black;
 
-                int startIndex = 0;
-                int endIndex = 5;
-
-                if (startIndex >= 0 && endIndex >= startIndex && endIndex < screenDefinition.LineEntries.Count)
+                // Display the screen lines
+                for (int i = startIndex; i <= endIndex; i++)
                 {
-                    for (int i = startIndex; i <= endIndex; i++)
-                    {
-                        var lineEntry = screenDefinition.LineEntries[i];
-                        Console.BackgroundColor = lineEntry.BackgroundColor;
-                        Console.ForegroundColor = lineEntry.ForegroundColor;
-                        Console.WriteLine(lineEntry.Text);
-                    }
+                    var lineEntry = screenDefinition.LineEntries[i];
+                    Console.BackgroundColor = lineEntry.BackgroundColor;
+                    Console.ForegroundColor = lineEntry.ForegroundColor;
+                    if (i == selectedIndex)
+                        Console.Write("-> "); // Indicate the selected line
+                    else
+                        Console.Write("   ");
+                    Console.WriteLine(lineEntry.Text);
                 }
-                // Restore default colors
-                Console.ResetColor();
-                string? choiceAsString = Console.ReadLine();
-                Console.Clear();
 
-                // Validate choice
-                try
+                // Handle user input
+                var key = Console.ReadKey(intercept: true).Key;
+                switch (key)
                 {
-                    if (choiceAsString is null)
-                    {
-                        throw new ArgumentNullException(nameof(choiceAsString));
-                    }
-
-                    ChimpanzeeScreenChoices choice = (ChimpanzeeScreenChoices)Int32.Parse(choiceAsString);
-                    switch (choice)
-                    {
-                        case ChimpanzeeScreenChoices.List:
-                            ListChimpanzees();
-                            break;
-
-                        case ChimpanzeeScreenChoices.Create:
-                            AddChimpanzee(); break;
-
-                        case ChimpanzeeScreenChoices.Delete:
-                            DeleteChimpanzee();
-                            break;
-
-                        case ChimpanzeeScreenChoices.Modify:
-                            EditChimpanzeeMain();
-                            break;
-
-                        case ChimpanzeeScreenChoices.Exit:
-                            var exitChimpanzee = screenDefinition.LineEntries[10];//Going back to parent menu.
-                            Console.BackgroundColor = exitChimpanzee.BackgroundColor;
-                            Console.ForegroundColor = exitChimpanzee.ForegroundColor;
-                            Console.WriteLine(exitChimpanzee.Text);
-                            Console.Clear();
-                            Console.ResetColor();
-                            return;
-                    }
-                }
-                catch
-                {
-                    var errorChimpanzee = screenDefinition.LineEntries[11];//Invalid input. Try again.
-                    Console.BackgroundColor = errorChimpanzee.BackgroundColor;
-                    Console.ForegroundColor = errorChimpanzee.ForegroundColor;
-                    Console.WriteLine(errorChimpanzee.Text);
+                    case ConsoleKey.UpArrow:
+                        selectedIndex = Math.Max(1, selectedIndex - 1);
+                        Console.Clear();
+                        break;
+                    case ConsoleKey.DownArrow:
+                        selectedIndex = Math.Min(5, selectedIndex + 1);
+                        Console.Clear();
+                        break;
+                    case ConsoleKey.Enter:
+                        switch (selectedIndex)
+                        {
+                            case 1:
+                                // Action for the first line
+                                ListChimpanzees();
+                                break;
+                            case 2:
+                                // Action for the second line
+                                AddChimpanzee();
+                                break;
+                            case 3:
+                                // Action for the third line
+                                DeleteChimpanzee();
+                                break;
+                            case 4:
+                                // Action for the fourth line
+                                EditChimpanzeeMain();
+                                break;
+                            case 5:
+                                // Action for the fifth line
+                                var screenDefinitions = ScreenDefinitionService.Load(ScreenDefinitionJson);
+                                var exitChimpanzee = screenDefinitions.LineEntries[10];//Going back to parent menu.
+                                Console.BackgroundColor = exitChimpanzee.BackgroundColor;
+                                Console.ForegroundColor = exitChimpanzee.ForegroundColor;
+                                Console.WriteLine(exitChimpanzee.Text);
+                                Console.ResetColor();
+                                Console.Clear();
+                                return;
+                            default:
+                                break;
+                        }
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -121,6 +129,7 @@ namespace SampleHierarchies.Gui
         /// </summary>
         private void ListChimpanzees()
         {
+            Console.Clear ();
             var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
             Console.WriteLine();
             if (_dataService?.Animals?.Mammals?.Chimpanzees is not null &&
@@ -155,6 +164,7 @@ namespace SampleHierarchies.Gui
         /// </summary>
         private void AddChimpanzee()
         {
+            Console.Clear();
             var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
             try
             {
@@ -178,6 +188,7 @@ namespace SampleHierarchies.Gui
         /// </summary>
         private void DeleteChimpanzee()
         {
+            Console.Clear();
             var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
             try
             {
@@ -222,6 +233,7 @@ namespace SampleHierarchies.Gui
         /// </summary>
         private void EditChimpanzeeMain()
         {
+            Console.Clear();
             var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
             try
             {
@@ -268,6 +280,7 @@ namespace SampleHierarchies.Gui
         /// <exception cref="ArgumentNullException"></exception>
         private Chimpanzee AddEditChimpanzee()
         {
+            Console.Clear();
             var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
             var addEditChimpanzees = screenDefinition.LineEntries[17];// What name of the chimpanzee?
             Console.BackgroundColor = addEditChimpanzees.BackgroundColor;

@@ -44,73 +44,81 @@ public sealed class WhaleScreen : Screen
     public override void Show()
     {
         Console.Clear();
-        while (true)
-        {
-            var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
-
-            int startIndex = 0;
-            int endIndex = 5;
-
-            if (startIndex >= 0 && endIndex >= startIndex && endIndex < screenDefinition.LineEntries.Count)
+        // Load the screen definition from the JSON file
+        var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
+        int selectedIndex = 1; // Track the currently selected line
+        int totalLines = screenDefinition.LineEntries.Count;
+        int startIndex = 0;
+        int endIndex = 5;
+        
+            while (true)
             {
+                Console.BackgroundColor = ConsoleColor.Black;
+
+                // Display the screen lines
                 for (int i = startIndex; i <= endIndex; i++)
                 {
                     var lineEntry = screenDefinition.LineEntries[i];
                     Console.BackgroundColor = lineEntry.BackgroundColor;
                     Console.ForegroundColor = lineEntry.ForegroundColor;
+                    if (i == selectedIndex)
+                        Console.Write("-> "); // Indicate the selected line
+                    else
+                        Console.Write("   ");
                     Console.WriteLine(lineEntry.Text);
                 }
-            }
-            // Restore default colors
-            Console.ResetColor();
-            string? choiceAsString = Console.ReadLine();
 
-            // Validate choice
-            try
-            {
-                if (choiceAsString is null)
+                // Handle user input
+                var key = Console.ReadKey(intercept: true).Key;
+                switch (key)
                 {
-                    throw new ArgumentNullException(nameof(choiceAsString));
-                }
-
-                WhaleScreenChoices choice = (WhaleScreenChoices)Int32.Parse(choiceAsString);
-                switch (choice)
-                {
-                    case WhaleScreenChoices.List:
-                        ListWhales();
-                        break;
-
-                    case WhaleScreenChoices.Create:
-                        AddWhale(); break;
-
-                    case WhaleScreenChoices.Delete:
-                        DeleteWhale();
-                        break;
-
-                    case WhaleScreenChoices.Modify:
-                        EditWhaleMain();
-                        break;
-
-                    case WhaleScreenChoices.Exit:
-                        var exitWhale = screenDefinition.LineEntries[10];//Going back to parent menu.
-                        Console.BackgroundColor = exitWhale.BackgroundColor;
-                        Console.ForegroundColor = exitWhale.ForegroundColor;
-                        Console.WriteLine(exitWhale.Text);
+                    case ConsoleKey.UpArrow:
+                        selectedIndex = Math.Max(1, selectedIndex - 1);
                         Console.Clear();
-                        Console.ResetColor();
-                        return;
+                        break;
+                    case ConsoleKey.DownArrow:
+                        selectedIndex = Math.Min(5, selectedIndex + 1);
+                        Console.Clear();
+                        break;
+                    case ConsoleKey.Enter:
+                        switch (selectedIndex)
+                        {
+                            case 1:
+                                // Action for the first line
+                                ListWhales();
+                                break;
+                            case 2:
+                                // Action for the second line
+                                AddWhale();
+                                break;
+                            case 3:
+                                // Action for the third line
+                                DeleteWhale();
+                                break;
+                            case 4:
+                                // Action for the fourth line
+                                EditWhaleMain();
+                                break;
+                            case 5:
+                                // Action for the fifth line
+                                var screenDefinitions = ScreenDefinitionService.Load(ScreenDefinitionJson);
+                                var exitWhales = screenDefinitions.LineEntries[10];//Going back to parent menu.
+                                Console.BackgroundColor = exitWhales.BackgroundColor;
+                                Console.ForegroundColor = exitWhales.ForegroundColor;
+                                Console.WriteLine(exitWhales.Text);
+                                Console.ResetColor();
+                                Console.Clear();
+                                return;
+                            default:
+                                break;
+                        }
+                        Console.BackgroundColor = ConsoleColor.Black;
+                        break;
+                    default:
+                        break;
                 }
-            }
-            catch
-            {
-                var errorWhale = screenDefinition.LineEntries[11];//Invalid input. Try again.
-                Console.BackgroundColor = errorWhale.BackgroundColor;
-                Console.ForegroundColor = errorWhale.ForegroundColor;
-                Console.WriteLine(errorWhale.Text);
             }
         }
-    }
-
     #endregion // Public Methods
 
     #region Private Methods
@@ -120,6 +128,7 @@ public sealed class WhaleScreen : Screen
     /// </summary>
     private void ListWhales()
     {
+        Console.Clear();
         var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
         Console.WriteLine();
         if (_dataService?.Animals?.Mammals?.Whales is not null &&
@@ -154,6 +163,7 @@ public sealed class WhaleScreen : Screen
     /// </summary>
     private void AddWhale()
     {
+        Console.Clear();
         var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
         try
         {
@@ -177,6 +187,7 @@ public sealed class WhaleScreen : Screen
     /// </summary>
     private void DeleteWhale()
     {
+        Console.Clear();
         var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
         try
         {
@@ -221,6 +232,7 @@ public sealed class WhaleScreen : Screen
     /// </summary>
     private void EditWhaleMain()
     {
+        Console.Clear();
         var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
         try
         {
@@ -267,6 +279,7 @@ public sealed class WhaleScreen : Screen
     /// <exception cref="ArgumentNullException"></exception>
     private Whale AddEditWhale()
     {
+        Console.Clear();
         var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
         var addEditWhales = screenDefinition.LineEntries[17];// What name of the whale?
         Console.BackgroundColor = addEditWhales.BackgroundColor;

@@ -98,6 +98,7 @@ internal static class Program
                 services.AddSingleton<ScreenDefinitionService, ScreenDefinitionService>();
                 //services.AddSingleton<TestScreen, TestScreen>();
                 services.AddSingleton<DogsScreen, DogsScreen>();
+                //services.AddSingleton<TestingScreen, TestingScreen>();
                 services.AddSingleton<OrangutanScreen, OrangutanScreen>();
                 services.AddSingleton<ChimpanzeeScreen, ChimpanzeeScreen>();
                 services.AddSingleton<WhaleScreen, WhaleScreen>();

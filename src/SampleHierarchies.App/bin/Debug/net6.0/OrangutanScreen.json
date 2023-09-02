@@ -6,27 +6,27 @@
       "ForegroundColor": "Red"
     },
     {
-      "Text": "1. List Orangutans",
+      "Text": "List Orangutans",
       "BackgroundColor": "Yellow",
       "ForegroundColor": "Magenta"
     },
     {
-      "Text": "2. Add Orangutan",
+      "Text": "Add Orangutan",
       "BackgroundColor": "Black",
       "ForegroundColor": "White"
     },
     {
-      "Text": "3. Delete Orangutan",
+      "Text": "Delete Orangutan",
       "BackgroundColor": "Black",
       "ForegroundColor": "Blue"
     },
     {
-      "Text": "4. Modify Orangutan",
+      "Text": "Modify Orangutan",
       "BackgroundColor": "White",
       "ForegroundColor": "Black"
     },
     {
-      "Text": "0. Exit",
+      "Text": "Exit",
       "BackgroundColor": "Black",
       "ForegroundColor": "White"
     },
