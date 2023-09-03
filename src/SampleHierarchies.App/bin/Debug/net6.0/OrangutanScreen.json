@@ -1,7 +1,7 @@
 {
   "LineEntries": [
     {
-      "Text": "Welcome to the Orangutan Screen!",
+      "Text": "Main Screen -> Animals Screen -> Mamamals Screen -> Orangutan Screen",
       "BackgroundColor": "Blue",
       "ForegroundColor": "Red"
     },

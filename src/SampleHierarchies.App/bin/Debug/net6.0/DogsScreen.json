@@ -1,7 +1,7 @@
 {
   "LineEntries": [
     {
-      "Text": "Welcome to the Dogs Screen!",
+      "Text": "Main Screen -> Animals Screen -> Mamamals Screen -> Dogs Screen",
       "BackgroundColor": "Black",
       "ForegroundColor": "Red"
     },

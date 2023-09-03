@@ -103,12 +103,12 @@ public sealed class MammalsScreen : Screen
                             // Action for the first line
                             Console.BackgroundColor = ConsoleColor.Black;
                             Console.Clear();
-                            _orangutanScreen.Show();
+                            _dogsScreen.Show();
                             break;
                         case 2:
                             Console.BackgroundColor = ConsoleColor.Black;
                             Console.Clear();
-                            _dogsScreen.Show();
+                            _orangutanScreen.Show();
                             break;
                         case 3:
                             Console.BackgroundColor = ConsoleColor.Black;
