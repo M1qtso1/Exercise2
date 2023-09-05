@@ -26,46 +26,8 @@ internal static class Program
     [STAThread]
     static void Main(string[] args)
     {
-        //// Create a collection of ScreenLineEntry objects
-        //    List<ScreenLineEntry> screenEntries = new List<ScreenLineEntry>
-        //    {
-        //        new ScreenLineEntry(ConsoleColor.Red, ConsoleColor.White, "Hello, World!"),
-        //    };
-
-        //    // Create an instance of ScreenEntriesData and populate it with the collection
-        //    ScreenEntriesData data = new ScreenEntriesData
-        //    {
-        //        Entries = screenEntries
-        //    };
-
-        //    // Serialize the data to JSON
-        //    string json = JsonConvert.SerializeObject(data, Formatting.Indented);
-
-        //    // Define the file path where you want to save the JSON
-        //    string filePath = "ScreenEntriesData.json";
-
-        //    // Write the JSON to the file
-        //    //File.WriteAllText(filePath, json);
-
-        
-        //    Console.WriteLine($"Screen entries data has been saved to {filePath}.");
-        //string jsonData = File.ReadAllText(filePath);
-
-        //// Deserialize the JSON data into an instance of ScreenEntriesData
-        //ScreenEntriesData deserializedData = JsonConvert.DeserializeObject<ScreenEntriesData>(jsonData);
-
-        //// Display the text on the screen
-        //foreach (var entry in deserializedData.Entries)
-        //{
-        //    Console.ForegroundColor = entry.ForegroundColor;
-        //    Console.BackgroundColor = entry.BackgroundColor;
-        //    Console.WriteLine(entry.Text);
-        //    Console.ResetColor();
-        //}
-
         var host = CreateHostBuilder().Build();
         ServiceProvider = host.Services;
-
         var mainScreen = ServiceProvider.GetRequiredService<MainScreen>();
         mainScreen.Show();
     }
@@ -87,18 +49,15 @@ internal static class Program
     static IHostBuilder CreateHostBuilder()
     {
         return Host.CreateDefaultBuilder()
-            .ConfigureServices((context, services) => 
+            .ConfigureServices((context, services) =>
             {
                 services.AddSingleton<ISettingsService, SettingsService>();
                 services.AddSingleton<SettingsService, SettingsService>();
-                services.AddSingleton<ISettings, Settings>();
                 services.AddSingleton<IEventAggregator, EventAggregator>();
                 services.AddSingleton<IDataService, DataService>();
                 services.AddSingleton<MainScreen, MainScreen>();
                 services.AddSingleton<ScreenDefinitionService, ScreenDefinitionService>();
-                //services.AddSingleton<TestScreen, TestScreen>();
                 services.AddSingleton<DogsScreen, DogsScreen>();
-                //services.AddSingleton<TestingScreen, TestingScreen>();
                 services.AddSingleton<OrangutanScreen, OrangutanScreen>();
                 services.AddSingleton<ChimpanzeeScreen, ChimpanzeeScreen>();
                 services.AddSingleton<WhaleScreen, WhaleScreen>();

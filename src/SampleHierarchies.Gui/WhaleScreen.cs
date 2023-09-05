@@ -1,71 +1,43 @@
-﻿using SampleHierarchies.Data;
-using SampleHierarchies.Data.Mammals;
+﻿using SampleHierarchies.Data.Mammals;
 using SampleHierarchies.Enums;
 using SampleHierarchies.Interfaces.Data;
-using SampleHierarchies.Interfaces.Data.Mammals;
 using SampleHierarchies.Interfaces.Services;
+using SampleHierarchies.Services;
+using System;
+using System.Collections.Generic;
 
-namespace SampleHierarchies.Gui;
-
-/// <summary>
-/// Mammals main screen.
-/// </summary>
-public sealed class WhaleScreen : Screen
+namespace SampleHierarchies.Gui
 {
-    #region Properties And Ctor
-
-    /// <summary>
-    /// Data service.
-    /// </summary>
-    private IDataService _dataService;
-    private object age;
-    private object lifestyle;
-
-    /// <summary>
-    /// Ctor.
-    /// </summary>
-    /// <param name="dataService">Data service reference</param>
-    public WhaleScreen(IDataService dataService, IScreenDefinitionService screenDefinitionService /*TestScreen testScreen*/) : base(screenDefinitionService, "WhaleScreen.json")
-    { 
-        _dataService = dataService;
-        //ScreenDefinitionJson = "whale_screen_definition.json";
-    }
-    //public override string? ScreenDefinitionJson
-    //{
-    //    get { return "whale_screen_definition.json"; } // Override with a specific value
-    //    set { base.ScreenDefinitionJson = value; }
-    //}
-
-    #endregion Properties And Ctor
-
-    #region Public Methods
-
-    /// <inheritdoc/>
-    public override void Show()
+    public sealed class WhaleScreen : Screen
     {
-        Console.Clear();
-        // Load the screen definition from the JSON file
-        var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
-        int selectedIndex = 1; // Track the currently selected line
-        int totalLines = screenDefinition.LineEntries.Count;
-        int startIndex = 0;
-        int endIndex = 5;
-        
+        private IDataService _dataService;
+        private readonly ScreenDefinitionService _screenDefinitionService;
+        private readonly string JsonFilePath = "WhaleScreen.json";
+
+        public WhaleScreen(IScreenDefinitionService screenDefinitionService, IDataService dataService, ScreenDefinitionService screenDefinitionServices) : base(screenDefinitionService, "WhaleScreen.json")
+        {
+            _dataService = dataService;
+            _screenDefinitionService = screenDefinitionServices;
+        }
+        public void Show()
+        {
+
+            Console.Clear();
+            int selectedIndex = 1; // Track the currently selected line
+            int startIndex = 0;
+            int endIndex = 5;
+
             while (true)
             {
+                Console.WriteLine();
                 Console.BackgroundColor = ConsoleColor.Black;
-
-                // Display the screen lines
                 for (int i = startIndex; i <= endIndex; i++)
                 {
-                    var lineEntry = screenDefinition.LineEntries[i];
-                    Console.BackgroundColor = lineEntry.BackgroundColor;
-                    Console.ForegroundColor = lineEntry.ForegroundColor;
                     if (i == selectedIndex)
                         Console.Write("-> "); // Indicate the selected line
                     else
                         Console.Write("   ");
-                    Console.WriteLine(lineEntry.Text);
+                    _screenDefinitionService.DisplayLines(JsonFilePath, i);
                 }
 
                 // Handle user input
@@ -84,29 +56,20 @@ public sealed class WhaleScreen : Screen
                         switch (selectedIndex)
                         {
                             case 1:
-                                // Action for the first line
                                 ListWhales();
                                 break;
                             case 2:
-                                // Action for the second line
                                 AddWhale();
                                 break;
                             case 3:
-                                // Action for the third line
                                 DeleteWhale();
                                 break;
                             case 4:
-                                // Action for the fourth line
                                 EditWhaleMain();
                                 break;
                             case 5:
-                                // Action for the fifth line
-                                var screenDefinitions = ScreenDefinitionService.Load(ScreenDefinitionJson);
-                                var exitWhales = screenDefinitions.LineEntries[10];//Going back to parent menu.
-                                Console.BackgroundColor = exitWhales.BackgroundColor;
-                                Console.ForegroundColor = exitWhales.ForegroundColor;
-                                Console.WriteLine(exitWhales.Text);
-                                Console.ResetColor();
+                                _screenDefinitionService.DisplayLines(JsonFilePath, 10);
+                                Thread.Sleep(500);
                                 Console.Clear();
                                 return;
                             default:
@@ -119,243 +82,178 @@ public sealed class WhaleScreen : Screen
                 }
             }
         }
-    #endregion // Public Methods
-
-    #region Private Methods
-
-    /// <summary>
-    /// List all dogs.
-    /// </summary>
-    private void ListWhales()
-    {
-        Console.Clear();
-        var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
-        Console.WriteLine();
-        if (_dataService?.Animals?.Mammals?.Whales is not null &&
-            _dataService.Animals.Mammals.Whales.Count > 0)
+        private void ListWhales()
         {
-            var listWhales = screenDefinition.LineEntries[6];//Here's the list of whales:
-            Console.BackgroundColor = listWhales.BackgroundColor;
-            Console.ForegroundColor = listWhales.ForegroundColor;
-            Console.WriteLine(listWhales.Text);
-            int i = 1;
-            foreach (Whale whale in _dataService.Animals.Mammals.Whales)
+            Console.Clear();
+            Console.WriteLine();
+            if (_dataService?.Animals?.Mammals?.Whales is not null &&
+                _dataService.Animals.Mammals.Whales.Count > 0)
             {
-                var listWhale = screenDefinition.LineEntries[6];//Whale
-                Console.BackgroundColor = listWhale.BackgroundColor;
-                Console.ForegroundColor = listWhale.ForegroundColor;
-                Console.WriteLine(listWhale.Text);
-                whale.Display();
-                i++;
+                _screenDefinitionService.DisplayLines(JsonFilePath, 6);//Here's the list of whales:
+                int i = 1;
+
+                foreach (Whale whale in _dataService.Animals.Mammals.Whales)
+                {
+                    _screenDefinitionService.DisplayLines(JsonFilePath, 7);//Whale
+                    whale.Display();
+                    i++;
+                }
+            }
+            else
+            {
+                _screenDefinitionService.DisplayLines(JsonFilePath, 8);//The list of whales is empty.
             }
         }
-        else
-        {
-            var listWhales = screenDefinition.LineEntries[8];//The list of whales is empty.
-            Console.BackgroundColor = listWhales.BackgroundColor;
-            Console.ForegroundColor = listWhales.ForegroundColor;
-            Console.WriteLine(listWhales.Text);
-        }
-    }
 
-    /// <summary>
-    /// Add a whale.
-    /// </summary>
-    private void AddWhale()
-    {
-        Console.Clear();
-        var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
-        try
+        private void AddWhale()
         {
-            Whale whale = AddEditWhale();
-            _dataService?.Animals?.Mammals?.Whales?.Add(whale);
-            var addWhales = screenDefinition.LineEntries[9];//Whale has been added to a list of whales
-            Console.BackgroundColor = addWhales.BackgroundColor;
-            Console.ForegroundColor = addWhales.ForegroundColor;
-            Console.WriteLine(addWhales.Text, whale.Name);
+            Console.Clear();
+            try
+            {
+                Whale whale = AddEditWhale();
+                _dataService?.Animals?.Mammals?.Whales?.Add(whale);
+                _screenDefinitionService.DisplayLines(JsonFilePath, 9); //Whale has been added to a list of whales
+                Console.Write(whale.Name);
+                Thread.Sleep(1000);
+                Console.Clear();
+            }
+            catch
+            {
+                _screenDefinitionService.DisplayLines(JsonFilePath, 11);//Invalid input.
+                Thread.Sleep(1000);
+                Console.Clear();
+            }
         }
-        catch
+
+        private void DeleteWhale()
         {
-            var addWhales = screenDefinition.LineEntries[11];//Invalid input.
-            Console.BackgroundColor = addWhales.BackgroundColor;
-            Console.ForegroundColor = addWhales.ForegroundColor;
-            Console.WriteLine(addWhales.Text);
+            Console.Clear();
+            try
+            {
+                _screenDefinitionService.DisplayLines(JsonFilePath, 12); //What is the name of the whale you want to delete?
+                string? name = Console.ReadLine();
+                if (name is null)
+                {
+                    throw new ArgumentNullException(nameof(name));
+                }
+                Whale? whale = (Whale?)(_dataService?.Animals?.Mammals?.Whales
+                    ?.FirstOrDefault(d => d is not null && string.Equals(d.Name, name)));
+                if (whale is not null)
+                {
+                    _dataService?.Animals?.Mammals?.Whales?.Remove(whale);
+                    _screenDefinitionService.DisplayLines(JsonFilePath, 13);//Whale has been deleted from a list of whales
+                    Console.Write(whale.Name);
+                    Thread.Sleep(1000);
+                    Console.Clear();
+                }
+                else
+                {
+                    _screenDefinitionService.DisplayLines(JsonFilePath, 14);//Whale not found.
+                    Thread.Sleep(1000);
+                    Console.Clear();
+                }
+            }
+            catch
+            {
+                _screenDefinitionService.DisplayLines(JsonFilePath, 11);//Invalid input. Try again.
+                Thread.Sleep(1000);
+                Console.Clear();
+            }
         }
-    }
-    /// <summary>
-    /// Deletes a whale.
-    /// </summary>
-    private void DeleteWhale()
-    {
-        Console.Clear();
-        var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
-        try
+
+        private void EditWhaleMain()
         {
-            var deleteWhales = screenDefinition.LineEntries[12];// What is the name of the whale you want to delete?
-            Console.BackgroundColor = deleteWhales.BackgroundColor;
-            Console.ForegroundColor = deleteWhales.ForegroundColor;
-            Console.WriteLine(deleteWhales.Text);
+            Console.Clear();
+            try
+            {
+                _screenDefinitionService.DisplayLines(JsonFilePath, 15);//What is the name of the whale you want to edit?
+                string? name = Console.ReadLine();
+                if (name is null)
+                {
+                    throw new ArgumentNullException(nameof(name));
+                }
+                Whale? whale = (Whale?)(_dataService?.Animals?.Mammals?.Whales
+                    ?.FirstOrDefault(d => d is not null && string.Equals(d.Name, name)));
+                if (whale is not null)
+                {
+                    Whale whaleEdited = AddEditWhale();
+                    whale.Copy(whaleEdited);
+                    _screenDefinitionService.DisplayLines(JsonFilePath, 16); //Whale after edit:
+                    whale.Display();
+                    Thread.Sleep(1000);
+                    Console.Clear();
+                }
+                else
+                {
+                    _screenDefinitionService.DisplayLines(JsonFilePath, 14);//Whale not found.
+                    Thread.Sleep(1000);
+                    Console.Clear();
+                }
+            }
+            catch
+            {
+                _screenDefinitionService.DisplayLines(JsonFilePath, 11);//Invalid input. Try again.
+                Thread.Sleep(1000);
+                Console.Clear();
+            }
+        }
+
+        private Whale AddEditWhale()
+        {
+            Console.Clear();
+            _screenDefinitionService.DisplayLines(JsonFilePath, 17);// What name of the whale?
             string? name = Console.ReadLine();
+            _screenDefinitionService.DisplayLines(JsonFilePath, 18);// What is the whale's age?
+            string? ageAsString = Console.ReadLine();
+            _screenDefinitionService.DisplayLines(JsonFilePath, 19);// This whale has echolocation? (true/false)?
+            string? echolocationAsString = Console.ReadLine();
+            _screenDefinitionService.DisplayLines(JsonFilePath, 20);// This whale is toothed? (true/false)
+            string? toothedAsString = Console.ReadLine();
+            _screenDefinitionService.DisplayLines(JsonFilePath, 21);// How long is its lifespan? (Enter a number)
+            string? lifespanAsString = Console.ReadLine();
+            _screenDefinitionService.DisplayLines(JsonFilePath, 22);// This whale has sociable behavior? (true/false)
+            string? behaviorAsString = Console.ReadLine();
+            _screenDefinitionService.DisplayLines(JsonFilePath, 23);// Feeds on squid?
+            string? feedsAsString = Console.ReadLine();
+
             if (name is null)
             {
                 throw new ArgumentNullException(nameof(name));
             }
-            Whale? whale = (Whale?)(_dataService?.Animals?.Mammals?.Whales
-                ?.FirstOrDefault(d => d is not null && string.Equals(d.Name, name)));
-            if (whale is not null)
+            if (ageAsString is null)
             {
-                _dataService?.Animals?.Mammals?.Whales?.Remove(whale);
-                var deleteWhale = screenDefinition.LineEntries[13];// Whale has been deleted from a list of whale
-                Console.BackgroundColor = deleteWhale.BackgroundColor;
-                Console.ForegroundColor = deleteWhale.ForegroundColor;
-                Console.WriteLine(deleteWhale.Text, whale.Name);
+                throw new ArgumentNullException(nameof(ageAsString));
             }
-            else
+            if (echolocationAsString is null)
             {
-                var deleteWhale = screenDefinition.LineEntries[14];// Whale not found.
-                Console.BackgroundColor = deleteWhale.BackgroundColor;
-                Console.ForegroundColor = deleteWhale.ForegroundColor;
-                Console.WriteLine(deleteWhale.Text);
+                throw new ArgumentNullException(nameof(echolocationAsString));
             }
-        }
-        catch
-        {
-            var deleteWhales = screenDefinition.LineEntries[11]; // Invalid input. Try again.
-            Console.BackgroundColor = deleteWhales.BackgroundColor;
-            Console.ForegroundColor = deleteWhales.ForegroundColor;
-            Console.WriteLine(deleteWhales.Text);
+            if (toothedAsString is null)
+            {
+                throw new ArgumentNullException(nameof(toothedAsString));
+            }
+            if (lifespanAsString is null)
+            {
+                throw new ArgumentNullException(nameof(lifespanAsString));
+            }
+            if (behaviorAsString is null)
+            {
+                throw new ArgumentNullException(nameof(behaviorAsString));
+            }
+            if (feedsAsString is null)
+            {
+                throw new ArgumentNullException(nameof(feedsAsString));
+            }
+            int age = Int32.Parse(ageAsString);
+            bool? echolocation = bool.Parse(echolocationAsString);
+            bool? toothed = bool.Parse(toothedAsString);
+            int? lifespan = Int32.Parse(lifespanAsString);
+            bool? behavior = bool.Parse(behaviorAsString);
+            string? feeds = feedsAsString;
+
+            Whale whale = new Whale(name, age, echolocation, toothed, lifespan, behavior, feeds);
+
+            return whale;
         }
     }
-
-    /// <summary>
-    /// Edits an existing whale after choice made.
-    /// </summary>
-    private void EditWhaleMain()
-    {
-        Console.Clear();
-        var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
-        try
-        {
-            var editWhales = screenDefinition.LineEntries[15];//What is the name of the whale you want to edit?
-            Console.BackgroundColor = editWhales.BackgroundColor;
-            Console.ForegroundColor = editWhales.ForegroundColor;
-            Console.WriteLine(editWhales.Text);
-            string? name = Console.ReadLine();
-            if (name is null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            Whale? whale = (Whale?)(_dataService?.Animals?.Mammals?.Whales
-                ?.FirstOrDefault(d => d is not null && string.Equals(d.Name, name)));
-            if (whale is not null)
-            {
-                Whale whaleEdited = AddEditWhale();
-                var editWhale = screenDefinition.LineEntries[16]; //Whale after edit:
-                Console.BackgroundColor = editWhale.BackgroundColor;
-                Console.ForegroundColor = editWhale.ForegroundColor;
-                Console.WriteLine(editWhale.Text);
-                whale.Display();
-            }
-            else
-            {
-                var editWhale = screenDefinition.LineEntries[14]; // Whale not found.
-                Console.BackgroundColor = editWhale.BackgroundColor;
-                Console.ForegroundColor = editWhale.ForegroundColor;
-                Console.WriteLine(editWhale.Text);
-            }
-        }
-        catch
-        {
-            var editWhales = screenDefinition.LineEntries[11];// Invalid input. Try again.
-            Console.BackgroundColor = editWhales.BackgroundColor;
-            Console.ForegroundColor = editWhales.ForegroundColor;
-            Console.WriteLine(editWhales.Text);
-        }
-    }
-
-    /// <summary>
-    /// Adds/edit specific whale.
-    /// </summary>
-    /// <exception cref="ArgumentNullException"></exception>
-    private Whale AddEditWhale()
-    {
-        Console.Clear();
-        var screenDefinition = ScreenDefinitionService.Load(ScreenDefinitionJson);
-        var addEditWhales = screenDefinition.LineEntries[17];// What name of the whale?
-        Console.BackgroundColor = addEditWhales.BackgroundColor;
-        Console.ForegroundColor = addEditWhales.ForegroundColor;
-        Console.WriteLine(addEditWhales.Text);
-        string? name = Console.ReadLine();
-        var addEditWhale = screenDefinition.LineEntries[18];// What is the whale's age?
-        Console.BackgroundColor = addEditWhale.BackgroundColor;
-        Console.ForegroundColor = addEditWhale.ForegroundColor;
-        Console.WriteLine(addEditWhale.Text);
-        string? ageAsString = Console.ReadLine();
-        var addEditWhalesEcholocation = screenDefinition.LineEntries[19];// This whale has echolocation? (true/false)?
-        Console.BackgroundColor = addEditWhalesEcholocation.BackgroundColor;
-        Console.ForegroundColor = addEditWhalesEcholocation.ForegroundColor;
-        Console.WriteLine(addEditWhalesEcholocation.Text);
-        string? echolocationAsString = Console.ReadLine();
-        var addEditWhalesTeeth = screenDefinition.LineEntries[20];// This whale is toothed? (true/false)
-        Console.BackgroundColor = addEditWhalesTeeth.BackgroundColor;
-        Console.ForegroundColor = addEditWhalesTeeth.ForegroundColor;
-        Console.WriteLine(addEditWhalesTeeth.Text);
-        string? toothedAsString = Console.ReadLine();
-        var addEditWhalesLifespan = screenDefinition.LineEntries[21];// How long is its lifespan? (Enter a number)
-        Console.BackgroundColor = addEditWhalesLifespan.BackgroundColor;
-        Console.ForegroundColor = addEditWhalesLifespan.ForegroundColor;
-        Console.WriteLine(addEditWhalesLifespan.Text);
-        string? lifespanAsString = Console.ReadLine();
-        var addEditWhalesBehavior = screenDefinition.LineEntries[22];// This whale has sociable behavior? (true/false)
-        Console.BackgroundColor = addEditWhalesBehavior.BackgroundColor;
-        Console.ForegroundColor = addEditWhalesBehavior.ForegroundColor;
-        Console.WriteLine(addEditWhalesBehavior.Text);
-        string? behaviorAsString = Console.ReadLine();
-        var addEditWhalesFeed = screenDefinition.LineEntries[23];// Feeds on squid?
-        Console.BackgroundColor = addEditWhalesFeed.BackgroundColor;
-        Console.ForegroundColor = addEditWhalesFeed.ForegroundColor;
-        Console.WriteLine(addEditWhalesFeed.Text);
-        string? feedsAsString = Console.ReadLine();
-
-        if (name is null)
-        {
-            throw new ArgumentNullException(nameof(name));
-        }
-        if (ageAsString is null)
-        {
-            throw new ArgumentNullException(nameof(ageAsString));
-        }
-        if (echolocationAsString is null)
-        {
-            throw new ArgumentNullException(nameof(echolocationAsString));
-        }
-        if (toothedAsString is null)
-        {
-            throw new ArgumentNullException(nameof(toothedAsString));
-        }
-        if (lifespanAsString is null)
-        {
-            throw new ArgumentNullException(nameof(lifespanAsString));
-        }
-        if (behaviorAsString is null)
-        {
-            throw new ArgumentNullException(nameof(behaviorAsString));
-        }
-        if (feedsAsString is null)
-        {
-            throw new ArgumentNullException(nameof(feedsAsString));
-        }
-        int age = Int32.Parse(ageAsString);
-        bool? echolocation = bool.Parse(echolocationAsString);
-        bool? toothed = bool.Parse(toothedAsString);
-        int? lifespan = Int32.Parse(lifespanAsString);
-        bool? behavior = bool.Parse(behaviorAsString);
-        string? feeds = feedsAsString;
-
-        Whale whale = new Whale(name, age, echolocation, toothed, lifespan, behavior, feeds);
-
-        return whale;
-    }
-
-    #endregion // Private Methods
 }

@@ -21,14 +21,8 @@ public abstract class Screen
         ScreenDefinitionService = screenDefinitionService;
         ScreenDefinitionJson = screenDefinitionJson;
     }
-    public virtual void Show()
-    {
-        Console.WriteLine("Showing screen");
-    }
     // Add a property for the screen color
     public string? ScreenColor { get; set; }
-
-    // Other properties and methods
 
     // Add a method for displaying the screen in the color specified in the settings
     public virtual void Display()
